@@ -64,6 +64,25 @@ export default function Home() {
               KODY OS
             </a>
             <a
+              href="https://brandbooks.eullerlolato.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                border: "1px solid var(--line)",
+                color: "var(--muted)",
+                borderRadius: 6,
+                padding: "8px 14px",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                fontFamily: "var(--font-audiowide)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Brand Books
+            </a>
+            <a
               href={`https://wa.me/${WHATSAPP}?text=${WHATSAPP_MSG}`}
               target="_blank"
               rel="noopener noreferrer"
