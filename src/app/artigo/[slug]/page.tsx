@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getPost, getAllPosts } from "@/lib/posts";
@@ -21,52 +22,46 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 function renderContent(content: string) {
   const lines = content.split("\n");
   const elements: React.ReactNode[] = [];
-  let i = 0;
 
-  while (i < lines.length) {
-    const line = lines[i];
-
+  lines.forEach((line, i) => {
     if (line.startsWith("## ")) {
       elements.push(
         <h2
           key={i}
           style={{
             fontFamily: "var(--font-audiowide)",
-            fontSize: "clamp(16px, 2.2vw, 22px)",
+            fontSize: "clamp(15px, 2.5vw, 20px)",
             color: "var(--bone)",
-            marginTop: 40,
-            marginBottom: 16,
+            marginTop: 36,
+            marginBottom: 14,
           }}
         >
           {line.slice(3)}
         </h2>
       );
-    } else if (line.startsWith("- **")) {
+    } else if (line.match(/^- \*\*.+\*\*/)) {
       const match = line.match(/^- \*\*(.+?)\*\*[:\s]*(.*)/);
       if (match) {
         elements.push(
-          <li key={i} style={{ color: "var(--muted)", fontSize: 16, lineHeight: 1.8, marginBottom: 8, marginLeft: 20 }}>
+          <li key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.8, marginBottom: 8, marginLeft: 20 }}>
             <strong style={{ color: "var(--bone)" }}>{match[1]}:</strong> {match[2]}
           </li>
         );
       }
     } else if (line.startsWith("- ")) {
       elements.push(
-        <li key={i} style={{ color: "var(--muted)", fontSize: 16, lineHeight: 1.8, marginBottom: 8, marginLeft: 20 }}>
+        <li key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.8, marginBottom: 8, marginLeft: 20 }}>
           {line.slice(2)}
         </li>
       );
-    } else if (line.trim() === "") {
-      // skip
-    } else {
+    } else if (line.trim() !== "") {
       elements.push(
-        <p key={i} style={{ color: "var(--muted)", fontSize: 16, lineHeight: 1.9, marginBottom: 20 }}>
+        <p key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.9, marginBottom: 18 }}>
           {line}
         </p>
       );
     }
-    i++;
-  }
+  });
 
   return <>{elements}</>;
 }
@@ -86,10 +81,10 @@ export default async function ArtigoPage({ params }: Props) {
       <header
         style={{
           borderBottom: "1px solid var(--line)",
-          padding: "20px 0",
+          padding: "16px 0",
           position: "sticky",
           top: 0,
-          background: "rgba(10,10,10,0.92)",
+          background: "rgba(10,10,10,0.95)",
           backdropFilter: "blur(12px)",
           zIndex: 10,
         }}
@@ -98,51 +93,52 @@ export default async function ArtigoPage({ params }: Props) {
           style={{
             maxWidth: 720,
             margin: "0 auto",
-            padding: "0 24px",
+            padding: "0 20px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            gap: 16,
           }}
         >
-          <Link
-            href="/"
-            style={{
-              fontFamily: "var(--font-audiowide)",
-              fontSize: 16,
-              color: "var(--bone)",
-              letterSpacing: "0.06em",
-            }}
-          >
-            EULLER<span style={{ color: "var(--orange)" }}>.</span>
+          <Link href="/">
+            <Image
+              src="/kody-logo.png"
+              alt="KODY"
+              width={72}
+              height={24}
+              style={{ objectFit: "contain" }}
+            />
           </Link>
           <a
             href={`https://wa.me/${WHATSAPP}?text=${whatsappMsg}`}
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              background: "var(--orange)",
-              color: "#fff",
+              border: "1px solid var(--orange)",
+              color: "var(--orange)",
               borderRadius: 6,
-              padding: "8px 16px",
-              fontSize: 12,
+              padding: "8px 14px",
+              fontSize: 11,
               fontWeight: 600,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
               fontFamily: "var(--font-audiowide)",
+              whiteSpace: "nowrap",
             }}
           >
-            Falar no WhatsApp
+            WhatsApp
           </a>
         </div>
       </header>
 
-      <article style={{ maxWidth: 720, margin: "0 auto", padding: "64px 24px 96px" }}>
+      <article style={{ maxWidth: 720, margin: "0 auto", padding: "48px 20px 80px" }}>
         {/* Meta */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 28, flexWrap: "wrap" }}>
           <span
             style={{
-              background: "rgba(255,69,0,0.1)",
-              color: "var(--orange)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--line)",
+              color: "var(--muted)",
               borderRadius: 4,
               padding: "3px 10px",
               fontSize: 11,
@@ -163,26 +159,24 @@ export default async function ArtigoPage({ params }: Props) {
           <span style={{ color: "var(--muted-2)", fontSize: 12 }}>· {post.tempoLeitura}</span>
         </div>
 
-        {/* Accent */}
         <hr
           style={{
             border: 0,
             height: 2,
-            width: 64,
+            width: 48,
             borderRadius: 2,
             background: "linear-gradient(90deg, #FF4500, rgba(255,69,0,0))",
-            marginBottom: 28,
+            marginBottom: 24,
           }}
         />
 
-        {/* Title */}
         <h1
           style={{
             fontFamily: "var(--font-audiowide)",
-            fontSize: "clamp(22px, 4vw, 36px)",
+            fontSize: "clamp(20px, 4vw, 32px)",
             lineHeight: 1.2,
             color: "var(--bone)",
-            marginBottom: 20,
+            marginBottom: 18,
           }}
         >
           {post.titulo}
@@ -190,44 +184,43 @@ export default async function ArtigoPage({ params }: Props) {
 
         <p
           style={{
-            fontSize: 18,
+            fontSize: "clamp(15px,2vw,17px)",
             color: "var(--muted)",
-            lineHeight: 1.7,
+            lineHeight: 1.75,
             borderBottom: "1px solid var(--line)",
-            paddingBottom: 32,
-            marginBottom: 40,
+            paddingBottom: 28,
+            marginBottom: 36,
           }}
         >
           {post.resumo}
         </p>
 
-        {/* Content */}
         <div>{renderContent(post.conteudo)}</div>
 
-        {/* WhatsApp CTA inline */}
+        {/* CTA */}
         <div
           style={{
-            marginTop: 56,
+            marginTop: 52,
             background: "var(--bg-card)",
             border: "1px solid var(--line)",
             borderLeft: "2px solid var(--orange)",
             borderRadius: 14,
-            padding: "32px",
+            padding: "clamp(24px,5vw,32px)",
             textAlign: "center",
           }}
         >
           <p
             style={{
               fontFamily: "var(--font-audiowide)",
-              fontSize: 18,
+              fontSize: "clamp(15px,2.5vw,18px)",
               color: "var(--bone)",
               marginBottom: 10,
             }}
           >
             Quer aplicar isso no seu negócio?
           </p>
-          <p style={{ color: "var(--muted)", fontSize: 14, marginBottom: 24 }}>
-            Me chama no WhatsApp e a gente conversa sobre o que faz sentido para você.
+          <p style={{ color: "var(--muted)", fontSize: 14, marginBottom: 22 }}>
+            Me chama no WhatsApp e a gente conversa.
           </p>
           <a
             href={`https://wa.me/${WHATSAPP}?text=${whatsappMsg}`}
@@ -235,26 +228,23 @@ export default async function ArtigoPage({ params }: Props) {
             rel="noopener noreferrer"
             style={{
               display: "inline-block",
-              background: "var(--orange)",
-              color: "#fff",
+              border: "1px solid var(--orange)",
+              color: "var(--orange)",
               borderRadius: 8,
-              padding: "14px 28px",
-              fontSize: 13,
+              padding: "13px 24px",
+              fontSize: 12,
               fontWeight: 700,
               fontFamily: "var(--font-audiowide)",
               letterSpacing: "0.1em",
+              textTransform: "uppercase",
             }}
           >
-            CONVERSAR NO WHATSAPP
+            Conversar no WhatsApp
           </a>
         </div>
 
-        {/* Back */}
-        <div style={{ marginTop: 40, textAlign: "center" }}>
-          <Link
-            href="/"
-            style={{ color: "var(--muted-2)", fontSize: 13, letterSpacing: "0.06em" }}
-          >
+        <div style={{ marginTop: 36, textAlign: "center" }}>
+          <Link href="/" style={{ color: "var(--muted-2)", fontSize: 13 }}>
             ← Voltar para os artigos
           </Link>
         </div>
