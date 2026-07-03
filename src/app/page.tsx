@@ -42,25 +42,47 @@ export default function Home() {
             height={24}
             style={{ objectFit: "contain", flexShrink: 0 }}
           />
-          <a
-            href={`https://wa.me/${WHATSAPP}?text=${WHATSAPP_MSG}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              border: "1px solid var(--orange)",
-              color: "var(--orange)",
-              borderRadius: 6,
-              padding: "8px 14px",
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              fontFamily: "var(--font-audiowide)",
-              whiteSpace: "nowrap",
-            }}
-          >
-            WhatsApp
-          </a>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <a
+              href="https://kodyos.eullerlolato.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: "var(--orange)",
+                color: "#fff",
+                borderRadius: 6,
+                padding: "8px 14px",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                fontFamily: "var(--font-audiowide)",
+                whiteSpace: "nowrap",
+                transition: "opacity 0.15s",
+              }}
+            >
+              KODY OS
+            </a>
+            <a
+              href={`https://wa.me/${WHATSAPP}?text=${WHATSAPP_MSG}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                border: "1px solid var(--line)",
+                color: "var(--muted)",
+                borderRadius: 6,
+                padding: "8px 14px",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                fontFamily: "var(--font-audiowide)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              WhatsApp
+            </a>
+          </div>
         </div>
       </header>
 
@@ -85,71 +107,98 @@ export default function Home() {
           </div>
 
           <hr
+            className="anim-slide-right delay-1"
             style={{
               border: 0,
               height: 2,
-              width: 48,
               borderRadius: 2,
               background: "linear-gradient(90deg, #FF4500, rgba(255,69,0,0))",
-              marginBottom: 24,
+              marginBottom: 28,
             }}
           />
 
-          <h1
+          {/* Foto + texto lado a lado */}
+          <div
             style={{
-              fontFamily: "var(--font-audiowide)",
-              fontSize: "clamp(24px, 5vw, 44px)",
-              lineHeight: 1.1,
-              color: "var(--bone)",
-              marginBottom: 18,
+              display: "flex",
+              gap: "clamp(20px, 4vw, 40px)",
+              alignItems: "flex-start",
+              flexWrap: "wrap",
             }}
           >
-            Euller Lolato
-          </h1>
-
-          <p
-            style={{
-              fontSize: "clamp(14px, 2vw, 16px)",
-              color: "var(--muted)",
-              maxWidth: "58ch",
-              lineHeight: 1.8,
-              marginBottom: 14,
-            }}
-          >
-            Empreendedor digital especializado em IA aplicada a negócios. Construo sistemas de
-            automação que ajudam empresas a estruturar sua presença online, produzir conteúdo e
-            vender mais — sem depender de equipes grandes.
-          </p>
-
-          <p
-            style={{
-              fontSize: "clamp(14px, 2vw, 15px)",
-              color: "var(--muted)",
-              maxWidth: "54ch",
-              lineHeight: 1.8,
-            }}
-          >
-            Aqui compartilho o que estou aprendendo, testando e construindo. Se você quer aplicar IA
-            no seu negócio antes de todo mundo, estamos no lugar certo.
-          </p>
-
-          <div style={{ marginTop: 28, display: "flex", gap: 10, flexWrap: "wrap" }}>
-            {["IA Aplicada", "Automação", "Conteúdo Digital", "Estratégia"].map((tag) => (
-              <span
-                key={tag}
+            {/* Foto */}
+            <div className="anim-scale-in delay-2" style={{ flexShrink: 0 }}>
+              <Image
+                src="/euller.jpg"
+                alt="Euller Lolato"
+                width={120}
+                height={120}
+                className="avatar-ring"
                 style={{
-                  background: "var(--bg-card)",
-                  border: "1px solid var(--line)",
-                  borderRadius: 100,
-                  padding: "5px 12px",
-                  fontSize: 11,
-                  color: "var(--muted)",
-                  letterSpacing: "0.06em",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  border: "2px solid var(--line)",
+                }}
+              />
+            </div>
+
+            {/* Texto */}
+            <div className="anim-fade-up delay-3" style={{ flex: 1, minWidth: 220 }}>
+              <h1
+                style={{
+                  fontFamily: "var(--font-audiowide)",
+                  fontSize: "clamp(22px, 4vw, 38px)",
+                  lineHeight: 1.1,
+                  color: "var(--bone)",
+                  marginBottom: 14,
                 }}
               >
-                {tag}
-              </span>
-            ))}
+                Euller Lolato
+              </h1>
+
+              <p
+                style={{
+                  fontSize: "clamp(14px, 2vw, 16px)",
+                  color: "var(--muted)",
+                  lineHeight: 1.8,
+                  marginBottom: 12,
+                }}
+              >
+                Empreendedor digital especializado em IA aplicada a negócios. Construo sistemas de
+                automação que ajudam empresas a estruturar sua presença online, produzir conteúdo e
+                vender mais — sem depender de equipes grandes.
+              </p>
+
+              <p
+                style={{
+                  fontSize: "clamp(14px, 2vw, 15px)",
+                  color: "var(--muted)",
+                  lineHeight: 1.8,
+                }}
+              >
+                Aqui compartilho o que estou aprendendo, testando e construindo. Se você quer
+                aplicar IA no seu negócio antes de todo mundo, estamos no lugar certo.
+              </p>
+
+              <div style={{ marginTop: 20, display: "flex", gap: 10, flexWrap: "wrap" }}>
+                {["IA Aplicada", "Automação", "Conteúdo Digital", "Estratégia"].map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      background: "var(--bg-card)",
+                      border: "1px solid var(--line)",
+                      borderRadius: 100,
+                      padding: "5px 12px",
+                      fontSize: 11,
+                      color: "var(--muted)",
+                      letterSpacing: "0.06em",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -173,8 +222,8 @@ export default function Home() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            {posts.map((post) => (
-              <PostCard key={post.slug} post={post} />
+            {posts.map((post, i) => (
+              <PostCard key={post.slug} post={post} index={i} />
             ))}
           </div>
         </section>

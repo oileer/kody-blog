@@ -3,26 +3,24 @@
 import Link from "next/link";
 import type { Post } from "@/lib/posts";
 
-export default function PostCard({ post }: { post: Post }) {
+export default function PostCard({ post, index = 0 }: { post: Post; index?: number }) {
   return (
-    <Link href={`/artigo/${post.slug}`}>
+    <Link href={`/artigo/${post.slug}`} className={`anim-fade-up delay-${Math.min(index + 1, 6)}`}>
       <article
+        className="post-card"
         style={{
           background: "var(--bg-card)",
           border: "1px solid var(--line)",
           borderRadius: 14,
-          padding: "28px 32px",
-          cursor: "pointer",
-          transition: "border-color 0.15s",
+          padding: "clamp(20px, 4vw, 28px) clamp(20px, 4vw, 32px)",
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--orange)")}
-        onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--line)")}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, flexWrap: "wrap" }}>
           <span
             style={{
-              background: "rgba(255,69,0,0.1)",
-              color: "var(--orange)",
+              background: "var(--bg-soft)",
+              border: "1px solid var(--line)",
+              color: "var(--muted)",
               borderRadius: 4,
               padding: "3px 10px",
               fontSize: 11,
@@ -46,10 +44,10 @@ export default function PostCard({ post }: { post: Post }) {
         <h2
           style={{
             fontFamily: "var(--font-audiowide)",
-            fontSize: "clamp(15px, 2vw, 19px)",
+            fontSize: "clamp(14px, 2vw, 18px)",
             color: "var(--bone)",
             marginBottom: 10,
-            lineHeight: 1.3,
+            lineHeight: 1.35,
           }}
         >
           {post.titulo}
@@ -60,11 +58,12 @@ export default function PostCard({ post }: { post: Post }) {
         <span
           style={{
             display: "inline-block",
-            marginTop: 16,
+            marginTop: 14,
             fontSize: 12,
             color: "var(--orange)",
             fontWeight: 600,
             letterSpacing: "0.08em",
+            transition: "letter-spacing 0.2s",
           }}
         >
           Ler artigo →

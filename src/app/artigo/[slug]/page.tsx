@@ -19,12 +19,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: `${post.titulo} — Euller Lolato`, description: post.resumo };
 }
 
+function parseLine(text: string): React.ReactNode {
+  // bold: **text**
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={i} style={{ color: "var(--bone)" }}>
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      part
+    )
+  );
+}
+
 function renderContent(content: string) {
   const lines = content.split("\n");
   const elements: React.ReactNode[] = [];
+  let listBuffer: React.ReactNode[] = [];
+
+  const flushList = (i: number) => {
+    if (listBuffer.length > 0) {
+      elements.push(
+        <ul key={`ul-${i}`} style={{ marginBottom: 18, paddingLeft: 0, listStyle: "none" }}>
+          {listBuffer}
+        </ul>
+      );
+      listBuffer = [];
+    }
+  };
 
   lines.forEach((line, i) => {
     if (line.startsWith("## ")) {
+      flushList(i);
       elements.push(
         <h2
           key={i}
@@ -32,37 +59,66 @@ function renderContent(content: string) {
             fontFamily: "var(--font-audiowide)",
             fontSize: "clamp(15px, 2.5vw, 20px)",
             color: "var(--bone)",
-            marginTop: 36,
+            marginTop: 40,
             marginBottom: 14,
           }}
         >
           {line.slice(3)}
         </h2>
       );
+    } else if (line.startsWith("---")) {
+      flushList(i);
+      elements.push(
+        <hr key={i} style={{ border: 0, borderTop: "1px solid var(--line)", margin: "36px 0" }} />
+      );
+    } else if (line.startsWith("> ")) {
+      flushList(i);
+      elements.push(
+        <blockquote
+          key={i}
+          style={{
+            borderLeft: "2px solid var(--orange)",
+            paddingLeft: 20,
+            margin: "24px 0",
+            color: "var(--muted)",
+            fontSize: "clamp(14px,2vw,15px)",
+            lineHeight: 1.8,
+            fontStyle: "italic",
+          }}
+        >
+          {parseLine(line.slice(2))}
+        </blockquote>
+      );
     } else if (line.match(/^- \*\*.+\*\*/)) {
       const match = line.match(/^- \*\*(.+?)\*\*[:\s]*(.*)/);
       if (match) {
-        elements.push(
-          <li key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.8, marginBottom: 8, marginLeft: 20 }}>
+        listBuffer.push(
+          <li key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.8, marginBottom: 8, paddingLeft: 16, position: "relative" }}>
+            <span style={{ color: "var(--orange)", position: "absolute", left: 0 }}>–</span>
             <strong style={{ color: "var(--bone)" }}>{match[1]}:</strong> {match[2]}
           </li>
         );
       }
     } else if (line.startsWith("- ")) {
-      elements.push(
-        <li key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.8, marginBottom: 8, marginLeft: 20 }}>
-          {line.slice(2)}
+      listBuffer.push(
+        <li key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.8, marginBottom: 8, paddingLeft: 16, position: "relative" }}>
+          <span style={{ color: "var(--orange)", position: "absolute", left: 0 }}>–</span>
+          {parseLine(line.slice(2))}
         </li>
       );
-    } else if (line.trim() !== "") {
+    } else if (line.trim() === "") {
+      flushList(i);
+    } else {
+      flushList(i);
       elements.push(
         <p key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.9, marginBottom: 18 }}>
-          {line}
+          {parseLine(line)}
         </p>
       );
     }
   });
 
+  flushList(lines.length);
   return <>{elements}</>;
 }
 
