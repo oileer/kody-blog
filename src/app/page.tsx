@@ -88,7 +88,7 @@ export default function Home() {
 
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 20px" }}>
         {/* Hero / Quem sou eu */}
-        <section style={{ padding: "60px 0 52px", borderBottom: "1px solid var(--line)" }}>
+        <section className="hero-section" style={{ padding: "60px 0 52px", borderBottom: "1px solid var(--line)" }}>
           <div
             style={{
               fontSize: 11,
