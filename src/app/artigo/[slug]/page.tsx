@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getPost, getAllPosts } from "@/lib/posts";
 import type { Metadata } from "next";
 
-const WHATSAPP = "5549991226005";
+const WHATSAPP = "5549991637585";
 
 type Props = { params: Promise<{ slug: string }> };
 

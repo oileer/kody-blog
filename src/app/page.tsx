@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getAllPosts } from "@/lib/posts";
 import PostCard from "@/components/PostCard";
 
-const WHATSAPP = "5549991226005";
+const WHATSAPP = "5549991637585";
 const WHATSAPP_MSG = encodeURIComponent(
   "Oi Euller! Vi seu blog e quero saber mais sobre IA para o meu negócio."
 );
