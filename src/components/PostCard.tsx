@@ -5,7 +5,10 @@ import type { Post } from "@/lib/posts";
 
 export default function PostCard({ post, index = 0 }: { post: Post; index?: number }) {
   return (
-    <Link href={`/artigo/${post.slug}`} className={`anim-fade-up delay-${Math.min(index + 1, 6)}`}>
+    <Link
+      href={`/artigo/${post.slug}`}
+      className={`reveal${index % 3 ? ` reveal-d${index % 3}` : ""}`}
+    >
       <article
         className="post-card"
         style={{

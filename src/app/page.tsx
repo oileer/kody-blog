@@ -109,6 +109,7 @@ export default function Home() {
         {/* Hero / Quem sou eu */}
         <section className="hero-section" style={{ padding: "60px 0 52px", borderBottom: "1px solid var(--line)" }}>
           <div
+            className="reveal"
             style={{
               fontSize: 11,
               fontWeight: 600,
@@ -146,7 +147,7 @@ export default function Home() {
             }}
           >
             {/* Foto */}
-            <div className="anim-scale-in delay-2" style={{ flexShrink: 0 }}>
+            <div className="reveal reveal-d1" style={{ flexShrink: 0 }}>
               <Image
                 src="/euller.jpg"
                 alt="Euller Lolato"
@@ -162,7 +163,7 @@ export default function Home() {
             </div>
 
             {/* Texto */}
-            <div className="anim-fade-up delay-3" style={{ flex: 1, minWidth: 220 }}>
+            <div className="reveal reveal-d2" style={{ flex: 1, minWidth: 220 }}>
               <h1
                 style={{
                   fontFamily: "var(--font-audiowide)",
@@ -224,6 +225,7 @@ export default function Home() {
         {/* Articles */}
         <section style={{ padding: "52px 0" }}>
           <div
+            className="reveal"
             style={{
               fontSize: 11,
               fontWeight: 600,
@@ -250,6 +252,7 @@ export default function Home() {
         {/* WhatsApp CTA */}
         <section style={{ padding: "0 0 80px", borderTop: "1px solid var(--line)", paddingTop: 52 }}>
           <div
+            className="reveal"
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--line)",

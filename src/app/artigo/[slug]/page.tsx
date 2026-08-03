@@ -41,7 +41,11 @@ function renderContent(content: string) {
   const flushList = (i: number) => {
     if (listBuffer.length > 0) {
       elements.push(
-        <ul key={`ul-${i}`} style={{ marginBottom: 18, paddingLeft: 0, listStyle: "none" }}>
+        <ul
+          key={`ul-${i}`}
+          className="reveal reveal-text"
+          style={{ marginBottom: 18, paddingLeft: 0, listStyle: "none" }}
+        >
           {listBuffer}
         </ul>
       );
@@ -55,6 +59,7 @@ function renderContent(content: string) {
       elements.push(
         <h2
           key={i}
+          className="reveal reveal-text"
           style={{
             fontFamily: "var(--font-audiowide)",
             fontSize: "clamp(15px, 2.5vw, 20px)",
@@ -69,13 +74,18 @@ function renderContent(content: string) {
     } else if (line.startsWith("---")) {
       flushList(i);
       elements.push(
-        <hr key={i} style={{ border: 0, borderTop: "1px solid var(--line)", margin: "36px 0" }} />
+        <hr
+          key={i}
+          className="reveal reveal-text"
+          style={{ border: 0, borderTop: "1px solid var(--line)", margin: "36px 0" }}
+        />
       );
     } else if (line.startsWith("> ")) {
       flushList(i);
       elements.push(
         <blockquote
           key={i}
+          className="reveal reveal-text"
           style={{
             borderLeft: "2px solid var(--orange)",
             paddingLeft: 20,
@@ -111,7 +121,7 @@ function renderContent(content: string) {
     } else {
       flushList(i);
       elements.push(
-        <p key={i} style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.9, marginBottom: 18 }}>
+        <p key={i} className="reveal reveal-text" style={{ color: "var(--muted)", fontSize: "clamp(14px,2vw,16px)", lineHeight: 1.9, marginBottom: 18 }}>
           {parseLine(line)}
         </p>
       );
@@ -189,7 +199,7 @@ export default async function ArtigoPage({ params }: Props) {
 
       <article style={{ maxWidth: 720, margin: "0 auto", padding: "48px 20px 80px" }}>
         {/* Meta */}
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 28, flexWrap: "wrap" }}>
+        <div className="reveal" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 28, flexWrap: "wrap" }}>
           <span
             style={{
               background: "var(--bg-card)",
@@ -227,6 +237,7 @@ export default async function ArtigoPage({ params }: Props) {
         />
 
         <h1
+          className="reveal reveal-d1"
           style={{
             fontFamily: "var(--font-audiowide)",
             fontSize: "clamp(20px, 4vw, 32px)",
@@ -239,6 +250,7 @@ export default async function ArtigoPage({ params }: Props) {
         </h1>
 
         <p
+          className="reveal reveal-d2"
           style={{
             fontSize: "clamp(15px,2vw,17px)",
             color: "var(--muted)",
@@ -255,6 +267,7 @@ export default async function ArtigoPage({ params }: Props) {
 
         {/* CTA */}
         <div
+          className="reveal"
           style={{
             marginTop: 52,
             background: "var(--bg-card)",
