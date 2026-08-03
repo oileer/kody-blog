@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Audiowide } from "next/font/google";
 import "./globals.css";
 import ScrollReveal from "@/components/ScrollReveal";
+import SmoothScroll from "@/components/SmoothScroll";
+import Parallax from "@/components/Parallax";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const audiowide = Audiowide({ weight: "400", subsets: ["latin"], variable: "--font-audiowide" });
@@ -19,6 +21,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <noscript>
           <style>{`.reveal{opacity:1 !important;transform:none !important;filter:none !important;}`}</style>
         </noscript>
+        <SmoothScroll />
+        <Parallax />
         <ScrollReveal />
         {children}
       </body>
