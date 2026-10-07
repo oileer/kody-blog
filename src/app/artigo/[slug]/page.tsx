@@ -150,7 +150,7 @@ export default async function ArtigoPage({ params }: Props) {
           padding: "16px 0",
           position: "sticky",
           top: 0,
-          background: "rgba(10,10,10,0.95)",
+          background: "rgba(247,242,237,0.95)",
           backdropFilter: "blur(12px)",
           zIndex: 10,
         }}
@@ -231,7 +231,7 @@ export default async function ArtigoPage({ params }: Props) {
             height: 2,
             width: 48,
             borderRadius: 2,
-            background: "linear-gradient(90deg, #FF4500, rgba(255,69,0,0))",
+            background: "linear-gradient(90deg, #A64B2A, rgba(166,75,42,0))",
             marginBottom: 24,
           }}
         />

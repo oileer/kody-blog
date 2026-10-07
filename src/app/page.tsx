@@ -19,7 +19,7 @@ export default function Home() {
           padding: "16px 0",
           position: "sticky",
           top: 0,
-          background: "rgba(10,10,10,0.95)",
+          background: "rgba(247,242,237,0.95)",
           backdropFilter: "blur(12px)",
           zIndex: 10,
         }}
@@ -132,7 +132,7 @@ export default function Home() {
               border: 0,
               height: 2,
               borderRadius: 2,
-              background: "linear-gradient(90deg, #FF4500, rgba(255,69,0,0))",
+              background: "linear-gradient(90deg, #A64B2A, rgba(166,75,42,0))",
               marginBottom: 28,
             }}
           />
